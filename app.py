@@ -1,6 +1,11 @@
 import os
 from flask import Flask, request, render_template
 from lib.database_connection import get_flask_database_connection
+from lib.album import Album
+from lib.album_repository import AlbumRepository
+from lib.artist import Artist
+from lib.artist_repository import ArtistRepository
+
 
 # Create a new Flask app
 app = Flask(__name__)
@@ -20,6 +25,47 @@ def get_emoji():
     # But first, it gets processed to look for placeholders like {{ emoji }}
     # These placeholders are replaced with the values we pass in as arguments
     return render_template('emoji.html', emoji=':)')
+
+
+@app.route('/list', methods=['GET'])
+def list_albums():
+    connection = get_flask_database_connection(app)
+    repository = AlbumRepository(connection)
+    albums = repository.all()
+    return render_template('albums/index.html', albums=albums)
+
+@app.route('/find/<int:id>', methods=['GET'])
+def get_album_by_ID(id):
+    connection = get_flask_database_connection(app)
+    repository = AlbumRepository(connection)
+    artist_repository = ArtistRepository(connection)
+    albums = repository.find(id)
+    artist = artist_repository.find(albums.artist_id)
+    return render_template('albums/find.html', albums=albums, artist=artist)
+
+@app.route('/albums', methods=['POST'])
+def add_albums():
+    connection = get_flask_database_connection(app)
+    repository = AlbumRepository(connection)
+    album = Album( None, request.form["title"], request.form["release_year"], request.form["artist_id"])
+    album = repository.create(album)
+    return "Album added successfully"
+
+@app.route('/artists', methods=['GET'])
+def list_artists():
+    connection = get_flask_database_connection(app)
+    repository = ArtistRepository(connection)
+    return "\n".join([
+            str(artist) for artist in repository.all()
+        ])
+
+@app.route('/add', methods=['POST'])
+def add_artist():
+    connection = get_flask_database_connection(app)
+    repository = ArtistRepository(connection)
+    artist = Artist( None, request.form["name"], request.form["genre"])
+    artist = repository.create(artist)
+    return "Artist added successfully"
 
 # This imports some more example routes for you to see how they work
 # You can delete these lines if you don't need them.
