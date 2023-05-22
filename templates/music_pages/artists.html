@@ -3,19 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Albums</title>
+    <title>Artists</title>
 </head>
 <body>
-    <h1>Albums</h1>
-    {% for album in albums %}
+    <h1>Artists</h1>
+    {% for artist in artists %}
     <article>
         <h2>
-            {{album.title}}
+            <a href="/artists/{{artist.id}}">
+            {{artist.name}}
+            </a>
         </h2>
         <p>
-        Release year: {{album.release_year}}    
+        Genre: {{artist.genre}}    
         </p>
     </article>
     {% endfor %}
+
 </body>
 </html>

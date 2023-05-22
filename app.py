@@ -11,39 +11,26 @@ from lib.artist_repository import ArtistRepository
 app = Flask(__name__)
 
 # == Your Routes Here ==
+# ------------------- albums routes --------------------------------
 
 
-# == Example Code Below ==
-
-# GET /emoji
-# Returns a smiley face in HTML
-# Try it:
-#   ; open http://localhost:5000/emoji
-@app.route('/emoji', methods=['GET'])
-def get_emoji():
-    # We use `render_template` to send the user the file `emoji.html`
-    # But first, it gets processed to look for placeholders like {{ emoji }}
-    # These placeholders are replaced with the values we pass in as arguments
-    return render_template('emoji.html', emoji=':)')
-
-
-@app.route('/list', methods=['GET'])
+@app.route('/albums', methods=['GET'])
 def list_albums():
     connection = get_flask_database_connection(app)
     repository = AlbumRepository(connection)
     albums = repository.all()
-    return render_template('albums/index.html', albums=albums)
+    return render_template('music_pages/index.html', albums=albums)
 
-@app.route('/find/<int:id>', methods=['GET'])
+@app.route('/albums/<int:id>', methods=['GET'])
 def get_album_by_ID(id):
     connection = get_flask_database_connection(app)
     repository = AlbumRepository(connection)
     artist_repository = ArtistRepository(connection)
     albums = repository.find(id)
     artist = artist_repository.find(albums.artist_id)
-    return render_template('albums/find.html', albums=albums, artist=artist)
+    return render_template('music_pages/find.html', albums=albums, artist=artist)
 
-@app.route('/albums', methods=['POST'])
+@app.route('/create', methods=['POST'])
 def add_albums():
     connection = get_flask_database_connection(app)
     repository = AlbumRepository(connection)
@@ -51,13 +38,15 @@ def add_albums():
     album = repository.create(album)
     return "Album added successfully"
 
+
+# ------------------- Artists routes --------------------
+
 @app.route('/artists', methods=['GET'])
 def list_artists():
     connection = get_flask_database_connection(app)
     repository = ArtistRepository(connection)
-    return "\n".join([
-            str(artist) for artist in repository.all()
-        ])
+    artists = repository.all()
+    return render_template('music_pages/artists.html', artists=artists)
 
 @app.route('/add', methods=['POST'])
 def add_artist():
@@ -67,6 +56,15 @@ def add_artist():
     artist = repository.create(artist)
     return "Artist added successfully"
 
+@app.route('/artists/<int:id>',  methods=['GET'])
+def get_artist_by_id(id):
+    connection = get_flask_database_connection(app)
+    repository = ArtistRepository(connection)
+    artist = repository.find(id)
+    return render_template("music_pages/get_artist.html", artist=artist)
+
+
+# ======================= END OF ROUTES =====================
 # This imports some more example routes for you to see how they work
 # You can delete these lines if you don't need them.
 from example_routes import apply_example_routes
