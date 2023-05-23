@@ -12,19 +12,22 @@ def test_get_all_records(db_connection):
         Album(1, "Doolittle", 1989, 1),
         Album(2, "Surfer Rosa", 1988, 1),
         ]
-    def test_create_album(db_connection):
-        repository = AlbumRepository(db_connection)
-
-        repository.create("Voyage", 2022, 2)
-        albums = repository.all()
-
-        assert albums == [
-            Album(1, "Doolittle", 1989, 1),
-            Album(2, "Surfer Rosa", 1988, 1)]
     
-    def test_get_single_record(db_connection):
-        db_connection.seed("seeds/music_web_app_html.sql")
-        repository = AlbumRepository(db_connection)
+def test_create_album(db_connection):
+    db_connection.seed("seeds/music_web_app_html.sql") 
+    repository = AlbumRepository(db_connection)
+    album = Album(None, "Test title", 1880, 1)
+    repository.create(album)
+    assert album.id == 3
 
-        album = repository.find(1)
-        assert album == Album(1, "Pixies", "Rock")
+    assert repository.all() == [
+        Album(1, "Doolittle", 1989, 1),
+        Album(2, "Surfer Rosa", 1988, 1),
+        Album(3, "Test title", 1880, 1)]
+
+def test_get_single_record(db_connection):
+    db_connection.seed("seeds/music_web_app_html.sql")
+    repository = AlbumRepository(db_connection)
+
+    album = repository.find(1)
+    assert album == Album(1, "Doolittle", 1989, 1)

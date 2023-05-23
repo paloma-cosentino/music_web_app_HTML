@@ -21,6 +21,12 @@ class ArtistRepository:
             'SELECT * from artists WHERE id = %s', [artist_id])
         row = rows[0]
         return Artist(row["id"], row["name"], row["genre"])
+    
+    def find_by_name(self, artist_name):
+        rows = self._connection.execute(
+            'SELECT * from artists WHERE name = %s', [artist_name])
+        row = rows[0]
+        return Artist(row["id"], row["name"], row["genre"])
 
     # Create a new artist
     # Do you want to get its id back? Look into RETURNING id;

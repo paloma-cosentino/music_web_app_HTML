@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add new album</title>
+</head>
+<body>
+    <h1>Add new album</h1>
+    <form action="/albums" methods="POST">
+        <label for="title">Album's title</label><br>
+        <input type="text" name="title" placeholder="Name of the album"><br>
+        
+        <label for="release_year">Release year</label><br>
+        <input type="number" name="release_year" min="1800" placeholder="1993"><br>
+        
+        <!-- <label for="artist_name">Artist name</label><br>
+        <input type="text" name="artist_name" placeholder="John Smith"><br> -->
+
+        <input type="submit" value="Add album">
+    </form>
+</body>
+</html>
