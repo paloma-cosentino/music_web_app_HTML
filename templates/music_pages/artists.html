@@ -9,14 +9,8 @@
     <h1>Artists</h1>
     {% for artist in artists %}
     <article>
-        <h2>
-            <a href="/artists/{{artist.id}}">
-            {{artist.name}}
-            </a>
-        </h2>
-        <p>
-        Genre: {{artist.genre}}    
-        </p>
+        <h2><a href="/artists/{{artist.id}}">{{artist.name}}</a></h2>
+        <p>Genre: {{artist.genre}}</p>
     </article>
     {% endfor %}
 

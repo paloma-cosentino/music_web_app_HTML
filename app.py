@@ -77,6 +77,10 @@ def get_artist_by_id(id):
     artist = repository.find(id)
     return render_template("music_pages/get_artist.html", artist=artist)
 
+@app.route('/artists/new', methods=['GET'])
+def create_a_new_album():
+    return render_template('music_pages/new_artist.html')
+
 
 # ======================= END OF ROUTES =====================
 # This imports some more example routes for you to see how they work

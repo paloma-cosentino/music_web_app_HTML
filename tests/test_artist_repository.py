@@ -12,6 +12,7 @@ def test_get_all_records(db_connection):
 
     assert artists == [
         Artist(1, "Pixies", "Rock"),
+        Artist(2, "Rolling Stones", "Rock"),
     ]
 
 """
@@ -39,7 +40,8 @@ def test_create_record(db_connection):
     result = repository.all()
     assert result == [
         Artist(1, "Pixies", "Rock"),
-        Artist(2, "The Beatles", "Rock")
+        Artist(2, "Rolling Stones", "Rock"),
+        Artist(3, "The Beatles", "Rock")
     ]
 
 """
@@ -54,4 +56,5 @@ def test_delete_record(db_connection):
     result = repository.all()
     assert result == [
         Artist(1, "Pixies", "Rock"),
+        Artist(2, "Rolling Stones", "Rock")
     ]
