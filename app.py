@@ -12,6 +12,12 @@ from lib.artist_repository import ArtistRepository
 app = Flask(__name__)
 
 # == Your Routes Here ==
+#-------------------- Generic Routes --------------------------------
+
+@app.route('/', methods=['GET'])
+def show_homepage():
+    return render_template("music_pages/index.html")
+
 # ------------------- albums routes --------------------------------
 
 
@@ -20,7 +26,7 @@ def list_albums():
     connection = get_flask_database_connection(app)
     repository = AlbumRepository(connection)
     albums = repository.all()
-    return render_template('music_pages/index.html', albums=albums)
+    return render_template('music_pages/albums.html', albums=albums)
 
 @app.route('/albums/<int:id>', methods=['GET'])
 def get_album_by_ID(id):
@@ -82,8 +88,6 @@ def add_artists():
     artist_name = request.form["artist_name"]
     artist_genre = request.form["genre"]
     artist = Artist(None, artist_name, artist_genre)
-    print(artist)
-    print('*******************************************')
     artist_id = repository.create(artist)
     return redirect(f"/artists/{artist_id}")
 

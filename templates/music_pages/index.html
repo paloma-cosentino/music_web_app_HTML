@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Albums</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../../styles/homepage.css">
+
+    <title>Music repository</title>
 </head>
 <body>
-    <h1>Albums</h1>
-    {% for album in albums %}
-    <article>
-        <h2>
-            <a href="/albums/{{album.id}}">
-            {{album.title}}
-            </a>
-        </h2>
-        <p>
-        Release year: {{album.release_year}}    
-        </p>
-    </article>
-    {% endfor %}
-    <a href="/albums/new">Add new album</a>
+    <div class="container">
+        <button>
+            <a href="/albums">List of albums</a>
+        </button>
+        <button>
+            <a href="/artists">List of artists</a>
+        </button>
+    </div>
 </body>
 </html>
