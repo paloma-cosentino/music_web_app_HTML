@@ -19,6 +19,7 @@ class ArtistRepository:
     def find(self, artist_id):
         rows = self._connection.execute(
             'SELECT * from artists WHERE id = %s', [artist_id])
+        print(rows)
         row = rows[0]
         return Artist(row["id"], row["name"], row["genre"])
     
@@ -26,6 +27,10 @@ class ArtistRepository:
         rows = self._connection.execute(
             'SELECT * from artists WHERE name = %s', [artist_name])
         row = rows[0]
+        #Throw an error message if the artist does not exist
+        #If rows is empty, ret
+        if artist_name == None:
+            self._connection.execute('INSERT INTO artists  VALUES')
         return Artist(row["id"], row["name"], row["genre"])
 
     # Create a new artist

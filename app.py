@@ -28,21 +28,26 @@ def get_album_by_ID(id):
     repository = AlbumRepository(connection)
     artist_repository = ArtistRepository(connection)
     albums = repository.find(id)
-    artist = artist_repository.find(albums.artist_id)
+    artistId = albums.artist_id
+    artist = artist_repository.find(artistId)
     return render_template('music_pages/find.html', albums=albums, artist=artist)
 
 @app.route('/albums', methods=['POST'])
 def add_albums():
     connection = get_flask_database_connection(app)
     repository = AlbumRepository(connection)
+
+    
     title = request.form['title']
     release_year = int(request.form['release_year'])
-    # artist_name = request.form['artist_name']
+    artist_name = request.form['artist_name']
+    print(f'{artist_name} artist_name')
     # artist = ArtistRepository.find_by_name(artist_name)
-    album = Album(None, title, release_year, 1)
-    repository.create(album)
+    album = Album(None, title, release_year)
+    new_album = repository.create(album)
+    print(album.id)
 
-    return redirect(f"/albums/{album.id}")
+    return redirect(f"/albums/{new_album.id}")
 
 
 @app.route('/albums/new', methods=['GET'])

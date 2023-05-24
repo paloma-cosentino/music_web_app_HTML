@@ -55,22 +55,35 @@ def test_create_album(page, test_web_address, db_connection):
     
     page.fill("input[name=title]", "Test album")
     page.fill("input[name=release_year]", "1996")
-    # page.fill("input[name=artist_name]", "Jonny")
+    page.fill("input[name=artist_name]", "Jonny")
 
     page.click("text='Add album'")
 
     h1_tags = page.locator(".album-title")
-    expect(h1_tags).to_have_text([
-        '\n            Test album\n        '
+    expect(h1_tags).to_have_text([ 'Test album'
         ])
-    release_tags = page.locator(".release-year")
-    expect(release_tags).to_have_text([
-        '\n        Release year: 1996    \n        '
+    release_tags = page.get_by_text('Release year:')
+    expect(release_tags).to_have_text([ 'Release year: 1996'
         ])
-    # artist_tag = page.locator('.artist-name')
-    # expect(artist_tag).to_have_text([
-    #     '\n        Artist: Jonny    \n        '
-    #     ])
+    artist_tag = page.locator('.artist-name')
+    expect(artist_tag).to_have_text([
+        'Artist: Jonny'
+        ])
+    
+def test_validate_album(page, test_web_address, db_connection):
+    page.set_default_timeout(1000)
+    db_connection.seed("seeds/music_web_app_html.sql")
+    page.goto(f"http://{test_web_address}/albums")
+    page.click("text='Add new album'")
+    page.click("text='Add album'")
+
+    errors_tag = page.locator(".t-errors")
+    expect(errors_tag).to_have_text(
+        "Your submission contains errors: " \
+        "Title can't be blank" \
+        "Release year can't be blank"
+    )
+    
 
 
 # --------------- Artist tests ----------------------

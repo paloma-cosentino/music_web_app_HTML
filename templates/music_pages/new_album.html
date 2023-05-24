@@ -7,15 +7,16 @@
 </head>
 <body>
     <h1>Add new album</h1>
-    <form action="/albums" methods="POST">
+    <form action="/albums" method="POST">
         <label for="title">Album's title</label><br>
         <input type="text" name="title" placeholder="Name of the album"><br>
         
         <label for="release_year">Release year</label><br>
-        <input type="number" name="release_year" min="1800" placeholder="1993"><br>
+        <input type="number" name="release_year" placeholder="1993"><br>
         
-        <!-- <label for="artist_name">Artist name</label><br>
-        <input type="text" name="artist_name" placeholder="John Smith"><br> -->
+        <label for="artist_name">Artist name</label><br>
+        <input type="text" name="artist_name" placeholder="John Smith"><br>
+        <!-- drop down instead of input -->
 
         <input type="submit" value="Add album">
     </form>
