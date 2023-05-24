@@ -39,8 +39,6 @@ def add_albums():
     title = request.form['title']
     release_year = int(request.form['release_year'])
     artist_name = request.form['artist_name']
-    print(artist_name)
-    print("HERE")
     album = Album(None, title, release_year, artist_name)
     new_album = repository.create(album)
 
@@ -62,13 +60,13 @@ def list_artists():
     artists = repository.all()
     return render_template('music_pages/artists.html', artists=artists)
 
-@app.route('/add', methods=['POST'])
-def add_artist():
-    connection = get_flask_database_connection(app)
-    repository = ArtistRepository(connection)
-    artist = Artist( None, request.form["name"], request.form["genre"])
-    artist = repository.create(artist)
-    return "Artist added successfully"
+# @app.route('/add', methods=['POST'])
+# def add_artist():
+#     connection = get_flask_database_connection(app)
+#     repository = ArtistRepository(connection)
+#     artist = Artist( None, request.form["name"], request.form["genre"])
+#     artist = repository.create(artist)
+#     return "Artist added successfully"
 
 @app.route('/artists/<int:id>',  methods=['GET'])
 def get_artist_by_id(id):
@@ -77,9 +75,23 @@ def get_artist_by_id(id):
     artist = repository.find(id)
     return render_template("music_pages/get_artist.html", artist=artist)
 
+@app.route('/artists', methods=['POST'])
+def add_artists():
+    connection = get_flask_database_connection(app)
+    repository = ArtistRepository(connection)
+    artist_name = request.form["artist_name"]
+    artist_genre = request.form["genre"]
+    artist = Artist(None, artist_name, artist_genre)
+    print(artist)
+    print('*******************************************')
+    artist_id = repository.create(artist)
+    return redirect(f"/artists/{artist_id}")
+
 @app.route('/artists/new', methods=['GET'])
-def create_a_new_album():
+def create_a_new_artist():
     return render_template('music_pages/new_artist.html')
+
+
 
 
 # ======================= END OF ROUTES =====================
