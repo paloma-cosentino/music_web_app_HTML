@@ -48,7 +48,7 @@ def add_albums():
     album = Album(None, title, release_year, artist_name)
     new_album = repository.create(album)
 
-    return redirect(f"music_pages/albums/{new_album.id}")
+    return redirect(f"albums/{new_album.id}")
 
 
 @app.route('/albums/new', methods=['GET'])
@@ -89,7 +89,7 @@ def add_artists():
     artist_genre = request.form["genre"]
     artist = Artist(None, artist_name, artist_genre)
     artist_id = repository.create(artist)
-    return redirect(f"music_pages/artists/{artist_id}")
+    return redirect(f"artists/{artist_id}")
 
 @app.route('/artists/new', methods=['GET'])
 def create_a_new_artist():
