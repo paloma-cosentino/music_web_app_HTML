@@ -1,0 +1,72 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    --bg-collors: #191414;
+    --highlight-collor: #1db954;
+    --text-collor: #ffffff;
+}
+
+:root{
+    font-size: 62.5%;
+
+    --ff-button:'Montserrat', sans-serif;
+
+    
+}
+
+body{
+    font-size: 1.6rem;
+    font-family: var(--ff-button);
+    background-color: var(--bg-collors);
+    color: var(--text-collor);
+}
+
+.container{
+    margin: 20rem 10rem;
+    min-width: 20rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: 20rem;
+}
+input,
+select {
+    width: 30rem;
+    height: 5rem;
+    padding: 1rem 3rem;
+    border-radius: 8px;
+    border: none;
+}
+
+#submitButton {
+    background-color: var(--highlight-collor);
+    font-size: 1.6rem;
+    color: var(--text-collor);
+}
+
+#submitButton:hover {
+    background: #1aa94c;
+}
+
+a {
+    color: var(--highlight-collor);
+    cursor: pointer;
+}
+
+.addNew,
+.backToHome {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}

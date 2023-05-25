@@ -1,30 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../static/css/form.css">
     <title>Add new album</title>
 </head>
 <body>
-    <h1>Add new album</h1>
-    <form action="/albums" method="POST">
-        <label for="title">Album's title</label><br>
-        <input type="text" name="title" placeholder="Name of the album"><br>
-        
-        <label for="release_year">Release year</label><br>
-        <input type="number" name="release_year" placeholder="1993"><br>
-        
-        <label for="artist_name">Select a artist name:</label><br>
-        <select name="artist_name" id="artist_toggle">
-            <option value=1>Pixies</option>
-            <option value=2>Rolling Stones</option>
-        </select>
+    <div class="container">
+        <h1>Add new album</h1>
+        <form action="/albums" method="POST">
+            <label for="title">Album's title</label>
+            <input type="text" name="title" placeholder="Name of the album">
+            
+            <label for="release_year">Release year</label>
+            <input type="number" name="release_year" placeholder="1993">
+            
+            <label for="artist_name">Select a artist name:</label>
+            <select name="artist_name" id="artist_toggle">
+                <option value=1>Pixies</option>
+                <option value=2>Rolling Stones</option>
+            </select>
 
-        <br>
-
-        <input type="submit" value="Add album">
-    </form>
-    <a href="/">Back to Homepage</a>
-
+            <input type="submit" value="Add album" id="submitButton">
+        </form>
+        <div class="backToHome">
+            <svg width="24" height="23" viewBox="0 0 24 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M23.5 11.5C23.5 11.8501 23.3602 12.1858 23.1114 12.4334C22.8625 12.6809 22.525 12.82 22.1731 12.82H9.45673L15.1537 18.4861C15.4029 18.7341 15.543 19.0704 15.543 19.4211C15.543 19.7718 15.4029 20.1081 15.1537 20.3561C14.9044 20.6041 14.5663 20.7434 14.2138 20.7434C13.8612 20.7434 13.5231 20.6041 13.2738 20.3561L5.31231 12.4361C5.1886 12.3135 5.09045 12.1677 5.02348 12.0073C4.95651 11.8469 4.92203 11.6748 4.92203 11.5011C4.92203 11.3274 4.95651 11.1553 5.02348 10.9949C5.09045 10.8345 5.1886 10.6887 5.31231 10.5661L13.2738 2.6461C13.3973 2.52331 13.5438 2.42591 13.7051 2.35946C13.8663 2.29301 14.0392 2.25881 14.2138 2.25881C14.3883 2.25881 14.5612 2.29301 14.7224 2.35946C14.8837 2.42591 15.0302 2.52331 15.1537 2.6461C15.2771 2.76889 15.375 2.91465 15.4418 3.07508C15.5086 3.23551 15.543 3.40745 15.543 3.5811C15.543 3.75475 15.5086 3.92669 15.4418 4.08712C15.375 4.24755 15.2771 4.39331 15.1537 4.5161L9.45673 10.18H22.1731C22.525 10.18 22.8625 10.3191 23.1114 10.5666C23.3602 10.8142 23.5 11.1499 23.5 11.5ZM1.82692 0.5C1.475 0.5 1.13749 0.639071 0.888647 0.886619C0.6398 1.13417 0.5 1.46991 0.5 1.82V21.18C0.5 21.5301 0.6398 21.8658 0.888647 22.1134C1.13749 22.3609 1.475 22.5 1.82692 22.5C2.17884 22.5 2.51635 22.3609 2.7652 22.1134C3.01405 21.8658 3.15385 21.5301 3.15385 21.18V1.82C3.15385 1.46991 3.01405 1.13417 2.7652 0.886619C2.51635 0.639071 2.17884 0.5 1.82692 0.5Z" fill="#1DB954"/>
+                </svg>
+                <a href="/"> Back to Homepage</a>
+        </div>
+    </div>
 </body>
 </html>

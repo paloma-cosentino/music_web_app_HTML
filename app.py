@@ -16,7 +16,7 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
 def show_homepage():
-    return render_template("music_pages/index.html")
+    return render_template("index.html")
 
 # ------------------- albums routes --------------------------------
 
@@ -48,7 +48,7 @@ def add_albums():
     album = Album(None, title, release_year, artist_name)
     new_album = repository.create(album)
 
-    return redirect(f"/albums/{new_album.id}")
+    return redirect(f"music_pages/albums/{new_album.id}")
 
 
 @app.route('/albums/new', methods=['GET'])
@@ -89,7 +89,7 @@ def add_artists():
     artist_genre = request.form["genre"]
     artist = Artist(None, artist_name, artist_genre)
     artist_id = repository.create(artist)
-    return redirect(f"/artists/{artist_id}")
+    return redirect(f"music_pages/artists/{artist_id}")
 
 @app.route('/artists/new', methods=['GET'])
 def create_a_new_artist():
@@ -99,10 +99,6 @@ def create_a_new_artist():
 
 
 # ======================= END OF ROUTES =====================
-# This imports some more example routes for you to see how they work
-# You can delete these lines if you don't need them.
-from example_routes import apply_example_routes
-apply_example_routes(app)
 
 # == End Example Code ==
 
